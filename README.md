@@ -23,8 +23,8 @@ npm run build
 
 ## Content and assets
 
-- The page and its sections live in `src/app/page.tsx`.
-- Brand styles and responsive layouts live in `src/app/globals.css`.
+- The page and its sections live in `src/app/page.tsx` and `src/components`.
+- Layout, color, and type styles are Tailwind class names on those components. `src/app/globals.css` holds theme tokens and a few global base rules.
 - Unbounded and Geist are self-hosted through `next/font/local` using Fontsource packages.
 - Supplied logos and the hero photograph live in `public/images`. The page uses an optimized WebP copy of the original photograph.
 - Product copy is based on the sibling API repository's `docs/PRODUCT.md` and `docs/PROGRESS.md`.

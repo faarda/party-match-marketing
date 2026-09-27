@@ -35,8 +35,13 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${unbounded.variable} ${geist.variable}`}>
-      <body>{children}</body>
+    <html
+      lang="en"
+      className={`${unbounded.variable} ${geist.variable} scroll-smooth scroll-pt-7 antialiased`}
+    >
+      <body className="m-0 bg-night font-sans text-paper scheme-dark">
+        {children}
+      </body>
     </html>
   );
 }

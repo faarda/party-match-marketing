@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
+import { cn } from "@/lib/cn";
 
 export function Arrow({
   diagonal = false,
@@ -44,7 +45,16 @@ export function Eyebrow({
   children: ReactNode;
   className?: string;
 }) {
-  return <p className={`eyebrow ${className}`}>{children}</p>;
+  return (
+    <p
+      className={cn(
+        "mb-[23px] flex items-center gap-2.5 text-[9px] font-[650] leading-normal tracking-[0.15em] sm:mb-7 md:text-[11px]",
+        className,
+      )}
+    >
+      {children}
+    </p>
+  );
 }
 
 export function WaitlistLink({
@@ -55,21 +65,42 @@ export function WaitlistLink({
   className?: string;
 }) {
   return (
-    <a className={`button ${className}`} href="#waitlist">
+    <a
+      className={cn(
+        "inline-flex min-h-[49px] items-center justify-center gap-[30px] rounded-[5px] bg-pink px-5 py-[15px] text-xs font-bold text-night transition-[background,transform] duration-[180ms] hover:-translate-y-0.5 hover:bg-pink-hover sm:min-h-[54px] sm:px-6 sm:py-[18px] sm:text-sm",
+        className,
+      )}
+      href="#waitlist"
+    >
       {children}
       <Arrow diagonal />
     </a>
   );
 }
 
-export function Brand({ width, height }: { width: number; height: number }) {
+export function Brand({
+  width,
+  height,
+  className = "",
+  imageClassName = "",
+}: {
+  width: number;
+  height: number;
+  className?: string;
+  imageClassName?: string;
+}) {
   return (
-    <a className="brand" href="#" aria-label="Party Match home">
+    <a
+      className={cn("inline-flex shrink-0", className)}
+      href="#"
+      aria-label="Party Match home"
+    >
       <Image
         src="/images/partymatch-logo-wordmark-pink-white.svg"
         alt="Party Match"
         width={width}
         height={height}
+        className={cn("h-auto", imageClassName)}
       />
     </a>
   );
@@ -83,8 +114,22 @@ export function TextLink({
   children: ReactNode;
 }) {
   return (
-    <a className="text-link" href={href}>
+    <a
+      className="mt-[22px] inline-flex items-center gap-5 border-b border-current py-1.5 text-xs font-[650] hover:text-pink sm:mt-7 sm:text-sm"
+      href={href}
+    >
       {children} <Arrow diagonal />
     </a>
+  );
+}
+
+export function StatusDot({ className = "" }: { className?: string }) {
+  return (
+    <span
+      className={cn(
+        "inline-block size-1.5 shrink-0 rounded-full bg-pink shadow-[0_0_0_4px_#ff3d811b]",
+        className,
+      )}
+    />
   );
 }

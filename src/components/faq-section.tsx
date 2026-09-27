@@ -1,4 +1,6 @@
 import { Eyebrow } from "@/components/ui";
+import { cn } from "@/lib/cn";
+import { pageWidth, sectionSpace } from "@/lib/styles";
 
 const faqs = [
   [
@@ -33,28 +35,38 @@ const faqs = [
 
 export function FaqSection() {
   return (
-    <section id="faq" className="faq-section section-space">
-      <div className="page-width faq-grid">
+    <section id="faq" className={sectionSpace}>
+      <div
+        className={cn(
+          pageWidth,
+          "grid grid-cols-1 gap-[30px] sm:grid-cols-[0.8fr_1.2fr] sm:gap-10 md:gap-[85px]",
+        )}
+      >
         <div>
           <Eyebrow>A FEW THINGS BEFORE WE GO</Eyebrow>
-          <h2 className="font-heading">
+          <h2 className="font-heading text-[39px] font-[650] leading-[1.17] tracking-[-0.055em] sm:text-4xl md:text-[clamp(35px,4vw,58px)]">
             Glad
-            <br /> you asked.
+            <br className="hidden sm:inline" /> you asked.
           </h2>
-          <p>
+          <p className="mt-[17px] text-sm text-muted sm:mt-[25px]">
             The party hasn’t started yet.
             <br />
             Here’s what to know.
           </p>
         </div>
-        <div className="faq-list">
+        <div className="border-t border-[#39363f]">
           {faqs.map(([question, answer]) => (
-            <details key={question}>
-              <summary>
+            <details key={question} className="group border-b border-[#39363f]">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-[15px] py-[21px] text-[13px] font-medium hover:text-pink sm:gap-[25px] sm:py-6 sm:text-xs md:text-sm [&::-webkit-details-marker]:hidden">
                 {question}
-                <span className="faq-plus" aria-hidden="true" />
+                <span
+                  className="relative block size-3.5 shrink-0 before:absolute before:top-[7px] before:block before:h-px before:w-3.5 before:bg-pink after:absolute after:top-[7px] after:block after:h-px after:w-3.5 after:rotate-90 after:bg-pink after:transition-transform after:duration-[180ms] group-open:after:rotate-0"
+                  aria-hidden="true"
+                />
               </summary>
-              <p>{answer}</p>
+              <p className="pr-[17px] pb-[23px] text-[13px] text-muted sm:pr-10">
+                {answer}
+              </p>
             </details>
           ))}
         </div>

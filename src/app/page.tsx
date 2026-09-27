@@ -15,7 +15,10 @@ import { WaitlistSection } from "@/components/waitlist-section";
 export default function Home() {
   return (
     <>
-      <a href="#main" className="skip-link">
+      <a
+        href="#main"
+        className="fixed top-[-100px] left-5 z-50 bg-white px-[22px] py-3.5 text-night focus:top-5"
+      >
         Skip to content
       </a>
       <SiteHeader />
