@@ -8,7 +8,7 @@ const faqs = [
   ],
   [
     "Can I download the app or sign up yet?",
-    "Not yet. Party Match is coming to Lagos, and we haven’t announced a launch date. Waitlist registration is also opening soon. The email form on this page is a preview and cannot collect or save your address.",
+    "The app isn’t out yet, and we haven’t announced a launch date. Join the waitlist on this page and we’ll tell you when Lagos is ready.",
   ],
   [
     "What’s the difference between Squad and Vibe?",

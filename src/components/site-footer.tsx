@@ -1,4 +1,5 @@
 import { Arrow, Brand } from "@/components/ui";
+import { WaitlistNavButton } from "@/components/waitlist-cta";
 import { cn } from "@/lib/cn";
 import { pageWidth } from "@/lib/styles";
 
@@ -22,9 +23,9 @@ export function SiteFooter() {
       >
         <a href="#safety">Safety & privacy</a>
         <a href="#faq">FAQs</a>
-        <a href="#waitlist">
+        <WaitlistNavButton className="inline-flex cursor-pointer items-center gap-[7px] border-0 bg-transparent p-0 text-inherit hover:text-pink">
           Waitlist <Arrow diagonal />
-        </a>
+        </WaitlistNavButton>
       </nav>
       <div className="mt-1 flex w-full flex-wrap items-center justify-between gap-5 border-t border-[#2d2931] py-6 text-[8px] text-[#99949f] sm:mt-5 sm:gap-0 sm:text-[9px]">
         <span>© {new Date().getFullYear()} Party Match</span>

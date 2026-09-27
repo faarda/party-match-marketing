@@ -67,4 +67,15 @@
   p {
     line-height: 1.75;
   }
+
+  @keyframes waitlist-dialog-in {
+    from {
+      opacity: 0;
+      transform: translateY(16px) scale(0.98);
+    }
+  }
+
+  .waitlist-dialog {
+    animation: waitlist-dialog-in 220ms ease-out;
+  }
 }

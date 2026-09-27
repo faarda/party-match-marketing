@@ -11,11 +11,12 @@ import { SiteHeader } from "@/components/site-header";
 import { SplitSection } from "@/components/split-section";
 import { SquadSection } from "@/components/squad-section";
 import { VibeSection } from "@/components/vibe-section";
+import { WaitlistProvider } from "@/components/waitlist-modal";
 import { WaitlistSection } from "@/components/waitlist-section";
 
 export default function Home() {
   return (
-    <>
+    <WaitlistProvider>
       <a
         href="#main"
         className="fixed top-[-100px] left-5 z-50 bg-white px-[22px] py-3.5 text-night focus:top-5"
@@ -60,6 +61,6 @@ export default function Home() {
       <Reveal>
         <SiteFooter />
       </Reveal>
-    </>
+    </WaitlistProvider>
   );
 }

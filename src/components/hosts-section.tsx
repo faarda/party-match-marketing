@@ -1,4 +1,5 @@
-import { Eyebrow, TextLink } from "@/components/ui";
+import { Eyebrow } from "@/components/ui";
+import { WaitlistTextLink } from "@/components/waitlist-cta";
 import { cn } from "@/lib/cn";
 import { pageWidth, sectionSpace } from "@/lib/styles";
 
@@ -28,7 +29,7 @@ export function HostsSection() {
             Anyone can create an event — ticketed or not. One-off nights or a
             weekly residency, with each date carrying its own itinerary.
           </p>
-          <TextLink href="#waitlist">Be part of what’s coming</TextLink>
+          <WaitlistTextLink>Be part of what’s coming</WaitlistTextLink>
         </div>
       </div>
     </section>

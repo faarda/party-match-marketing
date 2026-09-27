@@ -27,9 +27,9 @@ export function SquadSection() {
           <h2 className={featureHeading}>
             Your friends
             <br />
-            can’t make it.
+            can’t make it?
             <br />
-            <span className="text-pink">Your night can.</span>
+            <span className="text-pink">The Squad can</span>
           </h2>
           <p className={featureLead}>
             Find people who already have the same party in mind.

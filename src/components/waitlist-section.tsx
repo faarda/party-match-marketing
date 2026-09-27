@@ -1,4 +1,5 @@
-import { Arrow, Eyebrow, Star, StatusDot } from "@/components/ui";
+import { Eyebrow, Star, StatusDot } from "@/components/ui";
+import { WaitlistTeaserForm } from "@/components/waitlist-cta";
 import { cn } from "@/lib/cn";
 import { pageWidth } from "@/lib/styles";
 
@@ -44,40 +45,9 @@ export function WaitlistSection() {
             id="signup-description"
             className="mt-[17px] max-w-none text-[13px] text-[#644751] md:max-w-[330px]"
           >
-            We’re getting the guest list ready. Check back when registration
-            opens to leave your email.
+            Leave your email and we’ll save you a spot. Lagos is first.
           </p>
-          <form
-            className="mt-[25px]"
-            aria-label="Waitlist signup preview"
-            aria-describedby="signup-description"
-          >
-            <label
-              htmlFor="waitlist-email"
-              className="mb-[9px] block text-[11px] font-semibold"
-            >
-              Your email address
-            </label>
-            <div className="flex min-h-[54px] rounded-[10px] border border-[#b890a0] bg-[#f8dbe5] p-[5px]">
-              <input
-                id="waitlist-email"
-                name="email"
-                type="email"
-                placeholder="you@example.com"
-                disabled
-                autoComplete="email"
-                className="min-w-0 flex-1 cursor-not-allowed border-0 bg-transparent p-[9px] text-[13px] text-[#775864] opacity-100 placeholder:text-[#806773] placeholder:opacity-100"
-              />
-              <button
-                type="submit"
-                disabled
-                aria-label="Join waitlist — signups opening soon"
-                className="grid w-[46px] shrink-0 cursor-not-allowed place-items-center rounded-[8px] border-0 bg-[#a77d8d] text-[#f8e6ee]"
-              >
-                <Arrow />
-              </button>
-            </div>
-          </form>
+          <WaitlistTeaserForm />
         </div>
       </div>
     </section>

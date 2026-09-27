@@ -1,4 +1,5 @@
-import { Brand, WaitlistLink } from "@/components/ui";
+import { Brand } from "@/components/ui";
+import { WaitlistLink } from "@/components/waitlist-cta";
 
 export function SiteHeader() {
   return (

@@ -5,11 +5,28 @@ import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Eyebrow, Star, StatusDot, WaitlistLink } from "@/components/ui";
+import { Eyebrow, Star, StatusDot } from "@/components/ui";
+import { WaitlistLink } from "@/components/waitlist-cta";
 import { cn } from "@/lib/cn";
 import { pageWidth } from "@/lib/styles";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
+
+function waitForImage(img: HTMLImageElement | null) {
+  return new Promise<void>((resolve) => {
+    if (img?.complete && img.naturalWidth > 0) {
+      resolve();
+      return;
+    }
+    const done = () => resolve();
+    if (!img) {
+      resolve();
+      return;
+    }
+    img.addEventListener("load", done, { once: true });
+    img.addEventListener("error", done, { once: true });
+  });
+}
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -26,14 +43,23 @@ export function Hero() {
       const bar = barRef.current;
       const star = starRef.current;
       if (!section || !photo || !overlay || !bar || !star) return;
+
+      const clearCover = () => {
+        document.documentElement.classList.remove("overflow-hidden");
+      };
+
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
         gsap.set(overlay, { autoAlpha: 0 });
+        clearCover();
         return;
       }
 
       const header = document.querySelector("header");
       const copy = section.querySelectorAll<HTMLElement>("[data-hero-item]");
+      const img = photo.querySelector("img");
 
+      document.documentElement.classList.add("overflow-hidden");
+      gsap.ticker.lagSmoothing(0);
       gsap.set(photo, {
         clipPath: "inset(50% 0% 50% 0%)",
         scale: 1.08,
@@ -42,47 +68,72 @@ export function Hero() {
       gsap.set([header, ...copy].filter(Boolean), { autoAlpha: 0, y: 20 });
       gsap.set(star, { autoAlpha: 0, rotation: 12 });
 
-      const tl = gsap.timeline();
-      tl.to(bar, { width: "100%", duration: 0.95, ease: "power2.inOut" });
-      tl.to(overlay, { autoAlpha: 0, duration: 0.35, ease: "power1.out" });
-      tl.to(
-        photo,
-        {
-          clipPath: "inset(0% 0% 0% 0%)",
-          scale: 1,
-          duration: 1.05,
-          ease: "power2.inOut",
-        },
-        "<",
-      );
-      tl.to([header, ...copy].filter(Boolean), {
-        autoAlpha: 1,
-        y: 0,
-        duration: 0.65,
-        stagger: 0.08,
-        ease: "power2.out",
+      const grow = gsap.to(bar, {
+        width: "90%",
+        duration: 1.2,
+        ease: "power1.out",
       });
-      const spin = gsap.to(star, {
-        rotation: 28,
-        duration: 1.1,
-        ease: "power3.out",
-        repeat: -1,
-        yoyo: true,
-        repeatDelay: 0.7,
-        paused: true,
+
+      let cancelled = false;
+      let holdTimer = 0;
+      const minHold = new Promise<void>((resolve) => {
+        holdTimer = window.setTimeout(resolve, 550);
       });
-      tl.to(star, { autoAlpha: 1, duration: 0.4, ease: "power2.out" });
-      tl.call(() => spin.play());
+
+      Promise.all([waitForImage(img), minHold]).then(() => {
+        if (cancelled) return;
+        grow.kill();
+
+        const tl = gsap.timeline();
+        tl.to(bar, { width: "100%", duration: 0.22, ease: "power2.out" });
+        tl.to(overlay, {
+          autoAlpha: 0,
+          duration: 0.35,
+          ease: "power1.out",
+          onComplete: clearCover,
+        });
+        tl.to(
+          photo,
+          {
+            clipPath: "inset(0% 0% 0% 0%)",
+            scale: 1,
+            duration: 1.05,
+            ease: "power2.inOut",
+          },
+          "<",
+        );
+        tl.to([header, ...copy].filter(Boolean), {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.65,
+          stagger: 0.08,
+          ease: "power2.out",
+        });
+        const spin = gsap.to(star, {
+          rotation: 28,
+          duration: 1.1,
+          ease: "power3.out",
+          repeat: -1,
+          yoyo: true,
+          repeatDelay: 0.7,
+          paused: true,
+        });
+        tl.to(star, { autoAlpha: 1, duration: 0.4, ease: "power2.out" });
+        tl.call(() => spin.play());
+      });
+
+      return () => {
+        cancelled = true;
+        window.clearTimeout(holdTimer);
+        clearCover();
+      };
     },
     { scope: sectionRef },
   );
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative isolate min-h-[740px] overflow-hidden sm:min-h-[705px] md:min-h-[680px] lg:min-h-[705px] xl:min-h-[810px]"
-      aria-labelledby="hero-title"
-    >
+    <section ref={sectionRef} aria-labelledby="hero-title">
+      <div className="relative isolate min-h-[740px] overflow-hidden sm:min-h-[705px] md:min-h-[680px] lg:min-h-[705px] xl:min-h-[810px]">
       <div ref={photoRef} className="absolute inset-0 -z-[1] origin-center">
         <Image
           className="object-cover object-[54%_center] sm:object-[62%_center] md:object-[60%_center] lg:object-[center_48%]"
@@ -90,6 +141,7 @@ export function Hero() {
           alt="Four friends laughing together outside, drinks in hand."
           fill
           preload
+          placeholder="empty"
           sizes="100vw"
         />
         <div
@@ -162,9 +214,10 @@ export function Hero() {
           TOGETHER.
         </span>
       </div>
+      </div>
       <div
         ref={overlayRef}
-        className="absolute inset-0 z-30 flex items-end justify-center bg-night pb-[18vh]"
+        className="fixed inset-0 z-50 grid place-items-center bg-night"
         aria-hidden="true"
       >
         <div className="h-0.5 w-[min(220px,42vw)] overflow-hidden bg-white/15">

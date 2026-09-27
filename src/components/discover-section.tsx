@@ -1,4 +1,5 @@
-import { Arrow, Eyebrow, Star, TextLink } from "@/components/ui";
+import { Arrow, Eyebrow, Star } from "@/components/ui";
+import { WaitlistTextLink } from "@/components/waitlist-cta";
 import { cn } from "@/lib/cn";
 import {
   featureCopy,
@@ -34,7 +35,7 @@ export function DiscoverSection() {
             <li>See who’s going and mark your interest</li>
             <li>Get a feel for the night through its timeline and reviews</li>
           </ul>
-          <TextLink href="#waitlist">Find your next night</TextLink>
+          <WaitlistTextLink>Find your next night</WaitlistTextLink>
         </div>
         <DiscoveryArt />
       </div>
