@@ -1,47 +1,153 @@
-import { Eyebrow, TextLink } from "@/components/ui";
+"use client";
+
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/lib/cn";
 import { lightSection, pageWidth, sectionSpace } from "@/lib/styles";
 
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
+type Piece =
+  | { type: "text"; value: string; accent?: boolean }
+  | { type: "emoji"; glyph: string; label: string; punct?: string };
+
+const headline: Piece[] = [
+  { type: "text", value: "If you’ve ever wondered where to go" },
+  { type: "emoji", glyph: "📍", label: "where to go", punct: "," },
+  { type: "text", value: " felt lonely at a party" },
+  { type: "emoji", glyph: "🪩", label: "at a party" },
+  { type: "text", value: " or wanted to split bills" },
+  { type: "emoji", glyph: "💸", label: "split bills" },
+  { type: "text", value: " — " },
+  { type: "text", value: "Party Match is for you", accent: true },
+];
+
 export function ProblemSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+
+  useGSAP(
+    () => {
+      const heading = headingRef.current;
+      const section = sectionRef.current;
+      if (!heading || !section) return;
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        return;
+      }
+
+      const words = heading.querySelectorAll<HTMLElement>("[data-word]");
+      const emojiUnits =
+        heading.querySelectorAll<HTMLElement>("[data-emoji-unit]");
+      const units = heading.querySelectorAll<HTMLElement>(
+        "[data-word], [data-emoji-unit]",
+      );
+
+      gsap.set(words, { opacity: 0.18 });
+      gsap.set(emojiUnits, { opacity: 0, scale: 0 });
+      gsap.set(heading, { scale: 0.94 });
+
+      const tl = gsap.timeline();
+
+      units.forEach((unit, index) => {
+        const at = index * 0.1;
+        if (unit.hasAttribute("data-emoji-unit")) {
+          tl.to(
+            unit,
+            {
+              opacity: 1,
+              scale: 1,
+              duration: 0.4,
+              ease: "back.out(2.2)",
+            },
+            at,
+          );
+          return;
+        }
+
+        tl.to(unit, { opacity: 1, duration: 0.35, ease: "none" }, at);
+      });
+
+      tl.to(heading, { scale: 1.06, duration: tl.duration(), ease: "none" }, 0);
+
+      ScrollTrigger.create({
+        trigger: section,
+        animation: tl,
+        start: "top top",
+        end: "+=180%",
+        scrub: 0.6,
+        invalidateOnRefresh: true,
+      });
+    },
+    { scope: sectionRef },
+  );
+
   return (
-    <section id="the-problem" className={cn(lightSection, sectionSpace)}>
+    <section ref={sectionRef} id="the-problem" className="bg-night">
       <div
         className={cn(
-          pageWidth,
-          "grid grid-cols-1 items-center gap-[38px] sm:grid-cols-2 sm:gap-10 md:gap-[50px] lg:gap-[100px]",
+          lightSection,
+          sectionSpace,
+          "sticky top-0 z-[1] motion-reduce:static",
         )}
       >
-        <div>
-          <Eyebrow>THE GROUP CHAT DESERVES BETTER</Eyebrow>
-          <h2 className="font-heading text-[clamp(35px,8.7vw,49px)] font-[650] leading-[1.17] tracking-[-0.055em] sm:text-[37px] md:text-[clamp(39px,4.3vw,64px)]">
-            Lagos has
-            <br />
-            the parties.
-            <br className="hidden sm:inline" />
-            <span className="block text-[#ce235f] sm:inline">
-              Let’s fix
-              <br className="hidden sm:inline" /> the planning.
-            </span>
-          </h2>
-        </div>
-        <div className="max-w-[490px] pt-0 sm:pt-6">
-          <p className="text-[20px] leading-normal font-medium sm:text-lg md:text-[21px]">
-            The flyer’s on Instagram. The plan’s on WhatsApp. Your friends are
-            still saying “we’ll see.”
-          </p>
-          <p className="mt-[22px] text-sm text-[#626169] sm:text-[15px]">
-            And somehow, one person always ends up chasing the money. A good
-            night shouldn’t take this much work to get started.
-          </p>
-          <div className="mt-6 h-0.5 w-[65px] bg-[#d4d0ce] sm:mt-[30px]" />
-          <p className="mt-[22px] text-sm text-[#626169] sm:text-[15px]">
-            We’re bringing the whole night together: the place, the people, the
-            conversation and the shared costs. So “we should go out” has
-            somewhere to go.
-          </p>
-          <TextLink href="#discover">Here’s how we’ll get you outside</TextLink>
-        </div>
+        <h2
+          ref={headingRef}
+          className={cn(
+            pageWidth,
+            "font-heading origin-center text-center text-[clamp(32px,4.8vw,58px)] font-[650] leading-[1.2] tracking-[-0.055em] will-change-transform",
+          )}
+        >
+          {headline.map((piece, index) => {
+            if (piece.type === "emoji") {
+              return (
+                <span
+                  key={`emoji-${index}`}
+                  data-emoji-unit
+                  className="ml-[0.22em] inline-flex origin-center items-baseline whitespace-nowrap will-change-transform"
+                >
+                  <span
+                    role="img"
+                    aria-label={piece.label}
+                    className="inline-block translate-y-[0.08em] text-[1.12em]"
+                  >
+                    {piece.glyph}
+                  </span>
+                  {piece.punct ? (
+                    <span className="-ml-[0.16em] tracking-normal">
+                      {piece.punct}
+                    </span>
+                  ) : null}
+                </span>
+              );
+            }
+
+            return piece.value.split(/(\s+)/).map((token, tokenIndex) => {
+              if (token === "" || /^\s+$/.test(token)) {
+                return (
+                  <span key={`space-${index}-${tokenIndex}`}>{token}</span>
+                );
+              }
+
+              return (
+                <span
+                  key={`word-${index}-${tokenIndex}`}
+                  data-word
+                  data-accent={piece.accent ? "" : undefined}
+                  className={piece.accent ? "text-[#ce235f]" : undefined}
+                >
+                  {token}
+                </span>
+              );
+            });
+          })}
+        </h2>
       </div>
+      <div
+        className="h-[180vh] motion-reduce:hidden"
+        aria-hidden="true"
+      />
     </section>
   );
 }

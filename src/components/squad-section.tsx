@@ -16,7 +16,7 @@ export function SquadSection() {
   return (
     <section
       id="squad"
-      className={cn(sectionSpace, "border-t border-[#29272e]")}
+      className={cn(sectionSpace, "bg-[#18151c]")}
     >
       <div className={cn(pageWidth, featureGrid)}>
         <SquadArt />

@@ -1,7 +1,6 @@
 import { Arrow, Eyebrow, Star, TextLink } from "@/components/ui";
 import { cn } from "@/lib/cn";
 import {
-  featureBody,
   featureCopy,
   featureGrid,
   featureHeading,
@@ -27,13 +26,8 @@ export function DiscoverSection() {
             of <span className="text-pink">outside.</span>
           </h2>
           <p className={featureLead}>
-            From a rooftop link-up to the last song at the club. Find a night
-            that feels like you.
-          </p>
-          <p className={featureBody}>
             Explore what’s happening now, today or next weekend. Pick your party
-            type and look around your current location—or the neighbourhood
-            you’re heading to.
+            type and look around a location
           </p>
           <ul className={cn(featureList, "[&>li]:before:text-pink")}>
             <li>Club nights, day parties, beach hangs and more</li>

@@ -4,6 +4,7 @@ import { Hero, Ticker } from "@/components/hero";
 import { HostsSection } from "@/components/hosts-section";
 import { HowItWorksSection } from "@/components/how-it-works-section";
 import { ProblemSection } from "@/components/problem-section";
+import { Reveal } from "@/components/reveal";
 import { SafetySection } from "@/components/safety-section";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -24,19 +25,41 @@ export default function Home() {
       <SiteHeader />
       <main id="main">
         <Hero />
-        <Ticker />
+        <Reveal>
+          <Ticker />
+        </Reveal>
         <ProblemSection />
-        <DiscoverSection />
-        <SquadSection />
-        <VibeSection />
-        <SplitSection />
-        <HowItWorksSection />
-        <HostsSection />
-        <SafetySection />
-        <FaqSection />
-        <WaitlistSection />
+        <Reveal>
+          <DiscoverSection />
+        </Reveal>
+        <Reveal>
+          <SquadSection />
+        </Reveal>
+        <Reveal>
+          <VibeSection />
+        </Reveal>
+        <Reveal>
+          <SplitSection />
+        </Reveal>
+        <Reveal>
+          <HowItWorksSection />
+        </Reveal>
+        <Reveal>
+          <HostsSection />
+        </Reveal>
+        <Reveal>
+          <SafetySection />
+        </Reveal>
+        <Reveal>
+          <FaqSection />
+        </Reveal>
+        <Reveal>
+          <WaitlistSection />
+        </Reveal>
       </main>
-      <SiteFooter />
+      <Reveal>
+        <SiteFooter />
+      </Reveal>
     </>
   );
 }

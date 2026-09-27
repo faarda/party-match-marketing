@@ -1,4 +1,3 @@
-import { Eyebrow } from "@/components/ui";
 import { cn } from "@/lib/cn";
 import { pageWidth, sectionSpace } from "@/lib/styles";
 
@@ -43,7 +42,6 @@ export function FaqSection() {
         )}
       >
         <div>
-          <Eyebrow>A FEW THINGS BEFORE WE GO</Eyebrow>
           <h2 className="font-heading text-[39px] font-[650] leading-[1.17] tracking-[-0.055em] sm:text-4xl md:text-[clamp(35px,4vw,58px)]">
             Glad
             <br className="hidden sm:inline" /> you asked.

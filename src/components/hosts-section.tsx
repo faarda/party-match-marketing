@@ -25,9 +25,8 @@ export function HostsSection() {
             There’s room for your kind of night.
           </p>
           <p className="mt-5 text-sm text-muted">
-            Everyday hosts can create a simple listing. Organizers and venues
-            can apply for a verified profile, set up recurring weekly nights and
-            update each date with its own DJ, theme or special guest.
+            Anyone can create an event — ticketed or not. One-off nights or a
+            weekly residency, with each date carrying its own itinerary.
           </p>
           <TextLink href="#waitlist">Be part of what’s coming</TextLink>
         </div>

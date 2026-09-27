@@ -16,6 +16,13 @@
   --breakpoint-md: 50.0625rem; /* 801px */
   --breakpoint-lg: 68.8125rem; /* 1101px */
   --breakpoint-xl: 100rem; /* 1600px */
+  --animate-marquee: marquee 32s linear infinite;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 @layer base {
@@ -54,7 +61,7 @@
   button:focus-visible {
     outline: 3px solid currentColor;
     outline-offset: 6px;
-    border-radius: 3px;
+    border-radius: 8px;
   }
 
   p {

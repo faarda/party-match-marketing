@@ -25,8 +25,7 @@ export function SafetySection() {
             Clear boundaries.
           </h2>
           <p className="mt-5 max-w-none text-[13px] text-muted sm:max-w-80">
-            Meeting new people should come with choices you understand. Here’s
-            what we’re building around.
+            Meeting new people should come with choices you understand.
           </p>
         </div>
         <div className="flex flex-col justify-center gap-6 sm:gap-[25px]">

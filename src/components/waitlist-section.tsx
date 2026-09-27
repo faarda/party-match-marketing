@@ -40,12 +40,9 @@ export function WaitlistSection() {
           <h3 className="text-[23px] font-semibold tracking-[-0.045em] sm:text-xl md:text-[23px]">
             Get ready to get outside.
           </h3>
-          <p id="signup-status" className="mt-[17px] text-[13px] font-[650]">
-            Signups opening soon.
-          </p>
           <p
             id="signup-description"
-            className="mt-1.5 max-w-none text-[13px] text-[#644751] md:max-w-[330px]"
+            className="mt-[17px] max-w-none text-[13px] text-[#644751] md:max-w-[330px]"
           >
             We’re getting the guest list ready. Check back when registration
             opens to leave your email.
@@ -53,7 +50,7 @@ export function WaitlistSection() {
           <form
             className="mt-[25px]"
             aria-label="Waitlist signup preview"
-            aria-describedby="signup-status signup-description signup-note"
+            aria-describedby="signup-description"
           >
             <label
               htmlFor="waitlist-email"
@@ -61,7 +58,7 @@ export function WaitlistSection() {
             >
               Your email address
             </label>
-            <div className="flex min-h-[54px] rounded border border-[#b890a0] bg-[#f8dbe5] p-[5px]">
+            <div className="flex min-h-[54px] rounded-[10px] border border-[#b890a0] bg-[#f8dbe5] p-[5px]">
               <input
                 id="waitlist-email"
                 name="email"
@@ -75,14 +72,11 @@ export function WaitlistSection() {
                 type="submit"
                 disabled
                 aria-label="Join waitlist — signups opening soon"
-                className="grid w-[46px] shrink-0 cursor-not-allowed place-items-center rounded-[3px] border-0 bg-[#a77d8d] text-[#f8e6ee]"
+                className="grid w-[46px] shrink-0 cursor-not-allowed place-items-center rounded-[8px] border-0 bg-[#a77d8d] text-[#f8e6ee]"
               >
                 <Arrow />
               </button>
             </div>
-            <p id="signup-note" className="mt-3 text-[10px] text-[#644751]">
-              This form is a preview. Email addresses aren’t collected or saved.
-            </p>
           </form>
         </div>
       </div>

@@ -16,9 +16,6 @@ export function SiteFooter() {
         className="w-full sm:w-auto"
         imageClassName="w-[173px] sm:w-[180px]"
       />
-      <span className="hidden text-[11px] text-[#a4a0ad] lg:inline">
-        Made for the nights you’ll talk about.
-      </span>
       <nav
         className="flex gap-[25px] text-[10px] sm:gap-7 sm:text-[11px] [&_a]:inline-flex [&_a]:items-center [&_a]:gap-[7px] [&_a]:hover:text-pink [&_svg]:size-3"
         aria-label="Footer navigation"
@@ -32,7 +29,7 @@ export function SiteFooter() {
       <div className="mt-1 flex w-full flex-wrap items-center justify-between gap-5 border-t border-[#2d2931] py-6 text-[8px] text-[#99949f] sm:mt-5 sm:gap-0 sm:text-[9px]">
         <span>© {new Date().getFullYear()} Party Match</span>
         <span className="hidden tracking-[0.08em] sm:inline">
-          COMING TO LAGOS · 18+
+          Made for the nights you’ll talk about.
         </span>
         <a href="#" className="hover:text-pink">
           Back to top ↑

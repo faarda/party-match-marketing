@@ -29,18 +29,18 @@ export function SplitSection() {
             <span className="text-lime">Shared costs.</span>
           </h2>
           <p className={featureLead}>
-            The table is for everyone.
-            <br />
-            The money chase shouldn’t be for one person.
+            Have more fun outside. Pool for the tickets, tables and drinks that
+            make the night happen.
           </p>
           <p className={featureBody}>
-            We’re building group pools with a dedicated account for each
-            collection, so everyone can see the target and who’s chipped in.
+            Chip in with your people before you go, or while you’re already at
+            the party — so one person isn’t chasing the money, and everyone
+            actually makes it out.
           </p>
           <ul className={cn(featureList, "[&>li]:before:text-lime")}>
-            <li>Contribute from a linked bank account or your wallet</li>
-            <li>Keep the plan moving in your pool’s group chat</li>
-            <li>Missed deadline? Contributions return to your wallet</li>
+            <li>Pool funds for tickets, tables, drinks and the rest of the night</li>
+            <li>Pay in before you head out, or once you’re already there</li>
+            <li>See who’s chipped in, without the group-chat chase</li>
           </ul>
         </div>
         <PoolArt />

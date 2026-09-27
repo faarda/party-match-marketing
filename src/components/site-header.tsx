@@ -2,7 +2,7 @@ import { Brand, WaitlistLink } from "@/components/ui";
 
 export function SiteHeader() {
   return (
-    <header className="flex min-h-[74px] items-center justify-between gap-[15px] px-5 py-[18px] sm:min-h-20 sm:gap-5 sm:px-6 sm:py-[19px] md:gap-5 lg:min-h-[98px] lg:gap-[30px] lg:px-[4%] lg:py-6">
+    <header className="absolute inset-x-0 top-0 z-20 flex min-h-[74px] items-center justify-between gap-[15px] bg-transparent px-5 py-[18px] sm:min-h-20 sm:gap-5 sm:px-6 sm:py-[19px] md:gap-5 lg:min-h-[98px] lg:gap-[30px] lg:px-[4%] lg:py-6">
       <Brand
         width={220}
         height={33}

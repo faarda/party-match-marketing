@@ -1,4 +1,4 @@
-import { Eyebrow, Star } from "@/components/ui";
+import { Star } from "@/components/ui";
 import { cn } from "@/lib/cn";
 import { lightSection, pageWidth, sectionSpace } from "@/lib/styles";
 
@@ -27,7 +27,6 @@ export function HowItWorksSection() {
       <div className={pageWidth}>
         <div className="flex items-center justify-between">
           <div>
-            <Eyebrow>FROM “ANY PLANS?” TO “I’M OUTSIDE”</Eyebrow>
             <h2 className="font-heading text-[35px] font-[650] leading-[1.17] tracking-[-0.055em] sm:text-[clamp(35px,4vw,58px)]">
               A good night.
               <br />A simple plan.

@@ -67,7 +67,7 @@ export function WaitlistLink({
   return (
     <a
       className={cn(
-        "inline-flex min-h-[49px] items-center justify-center gap-[30px] rounded-[5px] bg-pink px-5 py-[15px] text-xs font-bold text-night transition-[background,transform] duration-[180ms] hover:-translate-y-0.5 hover:bg-pink-hover sm:min-h-[54px] sm:px-6 sm:py-[18px] sm:text-sm",
+        "inline-flex min-h-[49px] items-center justify-center gap-[30px] rounded-[10px] bg-pink px-5 py-[15px] text-xs font-bold text-night transition-[background,transform] duration-[180ms] hover:-translate-y-0.5 hover:bg-pink-hover sm:min-h-[54px] sm:px-6 sm:py-[18px] sm:text-sm",
         className,
       )}
       href="#waitlist"
