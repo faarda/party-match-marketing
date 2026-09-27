@@ -1,4 +1,5 @@
-import { NextResponse } from "next/server";
+import { after, NextResponse } from "next/server";
+import { notifySignup } from "@/lib/signup-notify";
 import { createServiceClient } from "@/lib/supabase";
 import { parseWaitlistPayload } from "@/lib/waitlist";
 
@@ -38,6 +39,14 @@ export async function POST(request: Request) {
         { status: 500 },
       );
     }
+
+    after(async () => {
+      try {
+        await notifySignup(parsed.data);
+      } catch (error) {
+        console.error("signup notification failed", error);
+      }
+    });
 
     return NextResponse.json({ ok: true });
   } catch (error) {

@@ -34,3 +34,16 @@ npm run build
 Waitlist CTAs navigate to the page's waitlist section. Registration is intentionally a disabled preview labelled “Signups opening soon.” No email is submitted or stored. Connect the form to a real registration service before enabling its controls.
 
 The homepage is statically prerendered. There is no API or database dependency.
+
+## Signup notifications
+
+After a waitlist signup is saved, `/api/waitlist` sends a notification email over SMTP (`src/lib/signup-notify.ts`). The email has the person's name, Lagos side, party types, and signup time. It leaves out email and phone. A failed send is logged and does not affect the signup response.
+
+| Variable           | Required | Notes                                       |
+| ------------------ | -------- | ------------------------------------------- |
+| `SMTP_HOST`        | yes      | Notifications are skipped when unset        |
+| `SMTP_USER`        | yes      |                                             |
+| `SMTP_PASS`        | yes      |                                             |
+| `SMTP_PORT`        | no       | Defaults to `587`; `465` uses implicit TLS  |
+| `SMTP_FROM`        | no       | Defaults to `SMTP_USER`                     |
+| `SIGNUP_NOTIFY_TO` | no       | Defaults to `silas+party-match@catlog.shop` |
