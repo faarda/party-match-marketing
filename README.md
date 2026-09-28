@@ -31,9 +31,7 @@ npm run build
 
 ## Waitlist
 
-Waitlist CTAs navigate to the page's waitlist section. Registration is intentionally a disabled preview labelled “Signups opening soon.” No email is submitted or stored. Connect the form to a real registration service before enabling its controls.
-
-The homepage is statically prerendered. There is no API or database dependency.
+Waitlist CTAs open a signup modal that posts to `/api/waitlist`. The route validates the input and upserts it into the Supabase `party_match_waitlist` table (keyed on email) using `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`.
 
 ## Waitlist admin
 
