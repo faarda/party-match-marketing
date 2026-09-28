@@ -39,4 +39,4 @@ The homepage is statically prerendered. There is no API or database dependency.
 
 `/admin/waitlist` lists every signup with totals by Lagos side and party type. It reads Supabase on the server with `SUPABASE_SERVICE_ROLE_KEY`, so the key never reaches the browser.
 
-`src/proxy.ts` puts `/admin` behind HTTP Basic auth. Set `ADMIN_PASSWORD` to open it; the browser asks for a username (any value works) and that password. Without `ADMIN_PASSWORD`, admin pages return 404.
+`src/proxy.ts` puts `/admin` behind HTTP Basic auth. The browser asks for a username (any value works) and the password hardcoded in `src/proxy.ts`. Setting `ADMIN_PASSWORD` overrides it.

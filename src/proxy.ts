@@ -9,13 +9,14 @@ function safeEqual(a: string, b: string) {
   return diff === 0;
 }
 
+// Hardcoded so the admin page works without extra env setup.
+// ADMIN_PASSWORD overrides it if set.
+const DEFAULT_ADMIN_PASSWORD = "ZbubnO3cCD0KhQbtL2BD";
+
 // Admin pages hold signup contact details, so they sit behind HTTP Basic auth.
-// Any username works; the password is ADMIN_PASSWORD. Without it the pages stay hidden.
+// Any username works.
 export function proxy(request: NextRequest) {
-  const password = process.env.ADMIN_PASSWORD;
-  if (!password) {
-    return new NextResponse("Not found", { status: 404 });
-  }
+  const password = process.env.ADMIN_PASSWORD || DEFAULT_ADMIN_PASSWORD;
 
   const header = request.headers.get("authorization") ?? "";
   if (header.startsWith("Basic ")) {
