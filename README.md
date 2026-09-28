@@ -34,3 +34,9 @@ npm run build
 Waitlist CTAs navigate to the page's waitlist section. Registration is intentionally a disabled preview labelled “Signups opening soon.” No email is submitted or stored. Connect the form to a real registration service before enabling its controls.
 
 The homepage is statically prerendered. There is no API or database dependency.
+
+## Waitlist admin
+
+`/admin/waitlist` lists every signup with totals by Lagos side and party type. It reads Supabase on the server with `SUPABASE_SERVICE_ROLE_KEY`, so the key never reaches the browser.
+
+`src/proxy.ts` puts `/admin` behind HTTP Basic auth. Set `ADMIN_PASSWORD` to open it; the browser asks for a username (any value works) and that password. Without `ADMIN_PASSWORD`, admin pages return 404.
