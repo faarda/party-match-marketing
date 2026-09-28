@@ -98,7 +98,9 @@ export function WaitlistProvider({ children }: { children: ReactNode }) {
     document.addEventListener("keydown", onKey);
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    panelRef.current?.querySelector<HTMLInputElement>('input[name="name"]')?.focus();
+    panelRef.current
+      ?.querySelector<HTMLInputElement>('input[name="name"]')
+      ?.focus();
 
     return () => {
       document.removeEventListener("keydown", onKey);
@@ -146,6 +148,7 @@ function WaitlistDialog({
 }) {
   const titleId = useId();
   const errorId = useId();
+  const [submitting, setSubmitting] = useState(false);
 
   function toggleParty(party: string) {
     setError("");
@@ -157,8 +160,9 @@ function WaitlistDialog({
     });
   }
 
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (submitting) return;
     if (!form.location) {
       setError("Pick mainland or island.");
       return;
@@ -168,7 +172,29 @@ function WaitlistDialog({
       return;
     }
     setError("");
-    setSubmitted(true);
+    setSubmitting(true);
+
+    try {
+      const response = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!response.ok) {
+        const body = (await response.json().catch(() => null)) as {
+          error?: string;
+        } | null;
+        setError(body?.error ?? "Could not join the waitlist. Try again.");
+        return;
+      }
+      setSubmitted(true);
+    } catch {
+      setError(
+        "Could not reach the server. Check your connection and try again.",
+      );
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -357,10 +383,14 @@ function WaitlistDialog({
 
                 <button
                   type="submit"
-                  className={cn(waitlistCtaClass, "mt-1 w-full gap-4")}
+                  className={cn(
+                    waitlistCtaClass,
+                    "mt-1 w-full gap-4 disabled:cursor-wait disabled:opacity-70",
+                  )}
                   aria-describedby={error ? errorId : undefined}
+                  disabled={submitting}
                 >
-                  Join the waitlist
+                  {submitting ? "Joining…" : "Join the waitlist"}
                   <Arrow diagonal />
                 </button>
               </form>
@@ -374,12 +404,14 @@ function WaitlistDialog({
 
 function CloseIcon() {
   return (
-    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-      <path
-        d="M1 1l12 12M13 1 1 13"
-        stroke="currentColor"
-        strokeWidth="1.6"
-      />
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 14 14"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path d="M1 1l12 12M13 1 1 13" stroke="currentColor" strokeWidth="1.6" />
     </svg>
   );
 }
