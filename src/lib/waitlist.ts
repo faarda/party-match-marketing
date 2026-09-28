@@ -6,7 +6,14 @@ export const PARTY_TYPES = [
   "House Parties",
   "Day Parties",
   "Rooftop Parties",
+  "Lounge Nights",
+  "Brunch Parties",
+  "Karaoke",
   "Live Music",
+  "Concerts",
+  "Festivals",
+  "Silent Discos",
+  "Boat Cruises",
 ] as const;
 
 export const LAGOS_SIDES = [
