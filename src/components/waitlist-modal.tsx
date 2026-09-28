@@ -14,30 +14,13 @@ import {
 } from "react";
 import { Arrow, Eyebrow, Star, StatusDot } from "@/components/ui";
 import { cn } from "@/lib/cn";
-
-const PARTY_TYPES = [
-  "Raves",
-  "Clubs",
-  "Beach Parties",
-  "Pool Parties",
-  "House Parties",
-  "Day Parties",
-  "Rooftop Parties",
-  "Live Music",
-] as const;
-
-const LAGOS_SIDES = [
-  { value: "mainland", label: "Mainland" },
-  { value: "island", label: "Island" },
-] as const;
+import { LAGOS_SIDES, PARTY_TYPES, type LagosSide } from "@/lib/waitlist";
 
 export const waitlistCtaClass =
   "inline-flex min-h-[49px] cursor-pointer items-center justify-center gap-[30px] rounded-[10px] bg-pink px-5 py-[15px] text-xs font-bold text-night transition-[background,transform] duration-[180ms] hover:-translate-y-0.5 hover:bg-pink-hover sm:min-h-[54px] sm:px-6 sm:py-[18px] sm:text-sm";
 
 const fieldClass =
   "w-full rounded-[10px] border border-[#d9cfd4] bg-white px-4 py-[13px] text-[13px] text-ink outline-none placeholder:text-[#9a8a91] focus:border-pink";
-
-type LagosSide = (typeof LAGOS_SIDES)[number]["value"];
 
 type WaitlistPrefill = {
   email?: string;
@@ -171,9 +154,9 @@ function WaitlistDialog({
       setError("Pick at least one kind of party.");
       return;
     }
+
     setError("");
     setSubmitting(true);
-
     try {
       const response = await fetch("/api/waitlist", {
         method: "POST",
@@ -268,6 +251,7 @@ function WaitlistDialog({
                     autoComplete="name"
                     required
                     value={form.name}
+                    disabled={submitting}
                     onChange={(event) =>
                       setForm({ ...form, name: event.target.value })
                     }
@@ -282,6 +266,7 @@ function WaitlistDialog({
                     autoComplete="email"
                     required
                     value={form.email}
+                    disabled={submitting}
                     onChange={(event) =>
                       setForm({ ...form, email: event.target.value })
                     }
@@ -298,6 +283,7 @@ function WaitlistDialog({
                     placeholder="0803 000 0000"
                     required
                     value={form.phone}
+                    disabled={submitting}
                     onChange={(event) =>
                       setForm({ ...form, phone: event.target.value })
                     }
@@ -327,6 +313,7 @@ function WaitlistDialog({
                             name="location"
                             value={side.value}
                             checked={selected}
+                            disabled={submitting}
                             onChange={() => {
                               setError("");
                               setForm({ ...form, location: side.value });
@@ -362,6 +349,7 @@ function WaitlistDialog({
                             name="parties"
                             value={party}
                             checked={selected}
+                            disabled={submitting}
                             onChange={() => toggleParty(party)}
                           />
                           {party}
@@ -389,9 +377,10 @@ function WaitlistDialog({
                   )}
                   aria-describedby={error ? errorId : undefined}
                   disabled={submitting}
+                  aria-busy={submitting}
                 >
                   {submitting ? "Joining…" : "Join the waitlist"}
-                  <Arrow diagonal />
+                  {submitting ? null : <Arrow diagonal />}
                 </button>
               </form>
             </>

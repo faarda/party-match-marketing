@@ -13,6 +13,8 @@ npm run dev
 
 Open http://localhost:3000.
 
+Copy `.env.example` to `.env.local`. For local tests, point it at the dockerized Supabase from `catlog/marketing-tracker` (`supabase start` there; API at `http://127.0.0.1:54321`). Production uses the Catlog Supabase project and a server-only `SUPABASE_SERVICE_ROLE_KEY`.
+
 ## Checks
 
 ```sh
@@ -31,7 +33,7 @@ npm run build
 
 ## Waitlist
 
-Waitlist CTAs open a signup modal that posts to `/api/waitlist`. The route validates the input and upserts it into the Supabase `party_match_waitlist` table (keyed on email) using `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`.
+Waitlist CTAs open a signup modal that posts to `/api/waitlist`. The route validates the input and upserts it into the Supabase `party_match_waitlist` table (keyed on email) using `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`. The homepage stays statically prerendered; only the API route talks to Supabase.
 
 ## Waitlist admin
 
