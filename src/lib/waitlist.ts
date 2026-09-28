@@ -7,6 +7,14 @@ export const PARTY_TYPES = [
   "Day Parties",
   "Rooftop Parties",
   "Live Music",
+  "Afrobeats Nights",
+  "Amapiano Nights",
+  "Owambe",
+  "Boat Parties",
+  "Brunch Parties",
+  "Lounges",
+  "Concerts & Festivals",
+  "Game Nights",
 ] as const;
 
 export const LAGOS_SIDES = [
