@@ -10,6 +10,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { SplitSection } from "@/components/split-section";
 import { SquadSection } from "@/components/squad-section";
+import { TimelineSection } from "@/components/timeline-section";
 import { VibeSection } from "@/components/vibe-section";
 import { WaitlistProvider } from "@/components/waitlist-modal";
 import { WaitlistSection } from "@/components/waitlist-section";
@@ -41,6 +42,9 @@ export default function Home() {
         </Reveal>
         <Reveal>
           <SplitSection />
+        </Reveal>
+        <Reveal>
+          <TimelineSection />
         </Reveal>
         <Reveal>
           <HowItWorksSection />
