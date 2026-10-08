@@ -6,7 +6,7 @@ export function SiteHeader() {
     <header className="absolute inset-x-0 top-0 z-20 flex min-h-[74px] items-center justify-between gap-[15px] bg-transparent px-5 py-[18px] sm:min-h-20 sm:gap-5 sm:px-6 sm:py-[19px] md:gap-5 lg:min-h-[98px] lg:gap-[30px] lg:px-[4%] lg:py-6">
       <Brand
         width={220}
-        height={33}
+        height={36}
         imageClassName="w-[143px] sm:w-[170px] md:w-[180px] lg:w-[210px]"
       />
       <nav

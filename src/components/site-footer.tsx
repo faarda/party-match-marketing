@@ -13,7 +13,7 @@ export function SiteFooter() {
     >
       <Brand
         width={205}
-        height={30}
+        height={33}
         className="w-full sm:w-auto"
         imageClassName="w-[173px] sm:w-[180px]"
       />
