@@ -20,7 +20,6 @@ export const metadata: Metadata = {
   title: "Party Match — Find the party. Find your people.",
   description:
     "Coming to Lagos. Discover parties near you, find your squad, meet someone with your vibe, and split the night together with Party Match.",
-  icons: { icon: "/images/partymatch-logo-pink.svg" },
   openGraph: {
     title: "Party Match — Find the party. Find your people.",
     description:

@@ -75,7 +75,7 @@ export function Brand({
       aria-label="Party Match home"
     >
       <Image
-        src="/images/partymatch-logo-wordmark-pink-white.svg"
+        src="/images/partymatch-wordmark-pink-white.png"
         alt="Party Match"
         width={width}
         height={height}
